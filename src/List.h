@@ -1,3 +1,5 @@
+//@author Zach Sabin
+//@author Kyle Zeller
 //create the structure and define all the functions
 
 typedef struct Node {

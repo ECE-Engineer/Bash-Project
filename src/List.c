@@ -1,3 +1,5 @@
+//@author Zach Sabin
+//@author Kyle Zeller
 //call in all the necessary libraries
 
 #include <stdio.h>
