@@ -29,22 +29,28 @@ const int ALPHA_CHAR_COUNT = 26;
  * when the user enters an empty string. 
  */
 int main() {
+	//set the max size for the path length and file name length
     char dir_name[MAX_PATH_LENGTH];
     char file_prefix[MAX_FILE_NAME_LENGTH];
+	//set max file input to a list of size 26
     List *file_names[ALPHA_CHAR_COUNT];
     int i;
     
+	//prompt the user for a folder
     printf("\nEnter a folder name: ");
     read_user_input(dir_name, MAX_PATH_LENGTH);
     for (i = 0; i < ALPHA_CHAR_COUNT; i++) {
+		//initialize a list of nodes
         file_names[i] = create_list();
     }
-        
+    
+	//print an error message for bad input AND sets the values of the list at the same time
     if (get_file_names(dir_name, file_names)){
         printf("Invalid Directory\n");
         return EXIT_SUCCESS;
     }
     
+	//prompt the user for a file name
     printf("Enter the beginning of a filename:");
     while (read_user_input(file_prefix, MAX_FILE_NAME_LENGTH)) {
         if (is_file_name_to_ignore(file_prefix)) {
@@ -80,9 +86,12 @@ int get_file_names(char *dir_name, List **buffer) {
     if (errno) {
         return errno;
     }
-
+	
+	//see if you get back a file name as a string
     while(file_name = get_next_file_name(dir_p)) {
+		//see if the files have uppercase letters
         if (!is_file_name_to_ignore(file_name)) {
+			//add the element to the specific node on the list
             int index = get_char_index(file_name);
             addElement(buffer[index], file_name);
         }
